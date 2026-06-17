@@ -11,50 +11,49 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     protected int attack;
     protected float moveSpeed;
     protected float attackDelay;
+    public WaitForSeconds AttackDelay;
+    protected float damageDelay;
+    public WaitForSeconds DamageDelay;
     protected ItemBase[] rewards;
     protected float itemDropRadius;
-
-    protected float damageDelay;
-    private WaitForSeconds DamageDelay;
     public bool IsDamageable { get; private set; } = true;
 
     private void Awake()
     {
-        enemySprite = GetComponent<Sprite>();
-
-        damageDelay = 0.1f;
-        DamageDelay = new WaitForSeconds(damageDelay);
+        enemySprite = enemyData.GetComponent<Sprite>();
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("PlayerBullet"))
+        if (collision.CompareTag("PlayerBullet"))
         {
             if (!IsDamageable) return;
-            PlayerBullet bullet = collision.gameObject.GetComponent<PlayerBullet>();
-            if(bullet != null)
+            PlayerBullet bullet = collision.GetComponent<PlayerBullet>();
+            if (bullet != null)
             {
                 Debug.Log("공격 감지");
                 TakeDamage(bullet.damage);
-                Destroy(collision.gameObject);                
+                Destroy(collision.gameObject);
             }
         }
     }
     public void Initialize(EnemyData data)
     {
         if (data == null) return;
-
         enemyData = data;
-
-        currentHp = enemyData.MaxHp;
-        attack = enemyData.Attack;
-        moveSpeed = enemyData.MoveSpeed;
         gameObject.name = enemyData.EnemyName;
-        rewards = enemyData.Rewards;
-        itemDropRadius = enemyData.ItemDropRadius;
-        if(enemySprite != null)
+        if (enemySprite != null)
         {
             enemySprite = enemyData.EnemySprite;
         }
+        currentHp = enemyData.MaxHp;
+        attack = enemyData.Attack;
+        moveSpeed = enemyData.MoveSpeed;
+        attackDelay = enemyData.AttackDelay;
+        damageDelay = enemyData.DamageDelay;
+        rewards = enemyData.Rewards;
+        itemDropRadius = enemyData.ItemDropRadius;
+        AttackDelay = new WaitForSeconds(attackDelay);
+        DamageDelay = new WaitForSeconds(damageDelay);
     }
     public void TakeDamage(int damage)
     {
