@@ -18,7 +18,8 @@ MonoBehaviour:
   maxHp: 30
   attack: 5
   moveSpeed: 1
-  attackDelay: 0.3
+  attackDelay: 5
+  damageDelay: 0.1
   rewards:
   - {fileID: 2631195015309332731, guid: 5e20048f9c9390f4ba869c4d604cc6ee, type: 3}
   - {fileID: 7859043392593209958, guid: 6f78d33403fbd5947baf7a6b5a2fc023, type: 3}
