@@ -11,32 +11,26 @@ public class BasicEnemy : EnemyBase
 
     [Header("이동 설정")]
     [SerializeField] private float toDistance = 5;
-    [SerializeField] private float radius = 5;
-    [SerializeField] private float rotateSpeed = 50;
 
     private float moveRandom;
     private float angle;
     private Coroutine attackRoutine;
 
+    private Vector3 dir;
     private void Awake()
     {
         moveRandom = Random.Range(0, 2);
     }
-    private void LateUpdate()
+    private void Update()
     {
         float dis = Vector3.Distance(Player.Instance.transform.position, transform.position);
 
+        dir = (Player.Instance.transform.position - transform.position).normalized;
         if (dis > toDistance)
         {
             Move();
         }
-        else if (dis <= toDistance)
-        {
-            RoundPlayer();
-        }
-    }
-    private void Update()
-    {
+
         Attack();
     }
     protected void Move()
@@ -52,15 +46,11 @@ public class BasicEnemy : EnemyBase
     }
     private void StraightMove()
     {
-        Vector3 dir = (Player.Instance.transform.position - transform.position).normalized;
-
         transform.position += dir * moveSpeed * Time.deltaTime;
     }
     private void CurveMove()
     {
         angle += moveSpeed * Time.deltaTime;
-
-        Vector3 dir = (Player.Instance.transform.position - transform.position).normalized;
 
         Vector3 basemove = dir * moveSpeed * Time.deltaTime;
 
@@ -68,23 +58,16 @@ public class BasicEnemy : EnemyBase
 
         Vector3 sideOffset = side * Mathf.Sin(angle * 3f) * 6f;
 
-        transform.position += basemove + sideOffset * Time.deltaTime;
-    }
-    protected void RoundPlayer()
-    {
-        transform.RotateAround(Player.Instance.transform.position, Vector3.forward, rotateSpeed * Time.deltaTime);
-
-        Vector3 dir = (transform.position - Player.Instance.transform.position).normalized;
-        transform.position = Player.Instance.transform.position + dir * radius;
+        transform.position += basemove + sideOffset;
     }
     protected void Attack()
     {
         if (attackRoutine == null)
         {
-            attackRoutine = StartCoroutine(StraightAttackCo());
+            attackRoutine = StartCoroutine(AttackCo());
         }
     }
-    private IEnumerator StraightAttackCo()
+    private IEnumerator AttackCo()
     {
         for (int i = 0; i < 3; i++)
         {
