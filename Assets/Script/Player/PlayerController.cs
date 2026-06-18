@@ -18,6 +18,19 @@ public class PlayerController : MonoBehaviour  // 플레이어의 인풋 ( 마�
     {
         HandleMovement();
         HandleFire();
+        ChangeGun();
+    }
+
+
+    private void ChangeGun()
+    {
+        for(int i = 0; i < PlayerInventory.Instance.QuickSlotLength; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1+i))
+            {
+                gunController.EquipWeapon(i);
+            }
+        }
     }
 
 
