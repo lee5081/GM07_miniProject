@@ -37,14 +37,13 @@ public class EliteEnemy : EnemyBase
     {
         while (true)
         {
-            int pattern = Random.Range(0, 4);
+            int pattern = Random.Range(0, 3);
 
             switch (pattern)
             {
                 case 0: yield return StartCoroutine(MoveSlowCo()); break;
                 case 1: yield return StartCoroutine(MoveCurveCo()); break;
                 case 2: yield return StartCoroutine(MoveDashCo()); break;
-                case 3: yield return StartCoroutine(MoveAroundCo()); break;
             }
             yield return StartCoroutine(ReturnPositionCo());
 
@@ -81,17 +80,6 @@ public class EliteEnemy : EnemyBase
         while (dis > 3 && timer < 3f)
         {
             transform.position += dir * moveSpeed * 7 * Time.deltaTime;
-            timer += Time.deltaTime;
-            yield return null;
-        }
-    }
-    private IEnumerator MoveAroundCo()
-    {
-        float timer = 0f;
-        while (dis > 3 && timer < 5f)
-        {
-            transform.RotateAround(Player.Instance.transform.position, Vector3.forward, rotateSpeed * Time.deltaTime);
-
             timer += Time.deltaTime;
             yield return null;
         }
