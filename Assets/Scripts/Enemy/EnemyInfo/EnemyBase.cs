@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -41,13 +41,13 @@ public class EnemyBase : MonoBehaviour, IDamageable
         sprite = GetComponent<Sprite>();
         sprite = enemySprite;
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         //if (!IsDamageable) return;
         //IsDamageable = false;
-        currentHp -= damage;
-        Debug.Log($"{gameObject.name} µ¥¹ÌÁö ¹ŞÀ½ ({damage}");
-        Debug.Log($"{gameObject.name} ÇöÀç Ã¼·Â : {currentHp}");
+        currentHp -= (int)damage;
+        Debug.Log($"{gameObject.name} ë°ë¯¸ì§€ ë°›ìŒ ({damage}");
+        Debug.Log($"{gameObject.name} í˜„ì¬ ì²´ë ¥ : {currentHp}");
         if (currentHp <= 0)
         {
             EnemyDie();
@@ -59,7 +59,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
     }
     protected void EnemyDie()
     {
-        Debug.Log($"{gameObject.name} »ç¸Á");
+        Debug.Log($"{gameObject.name} ì‚¬ë§");
         Destroy(gameObject);
         DropRewards();
     }
@@ -72,8 +72,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
     {
         for (int i = 0; i < bulletRewards.Length; i++)
         {
-            //ÇÃ·¹ÀÌ¾î ¹«±â ¸®½ºÆ®¸¦ ¹Ş¾Æ¼­ ÇØ´çµÇ´Â Åº¾à µå¶øÇÏµµ·Ï ±¸Çö
-            //ÇÃ·¹ÀÌ¾î ¿¡¼­ ¹«±â °ü¸®¸¦ ¾î¶»°Ô ÇÒÁö ¹ŞÀº ÈÄ ±¸Çö 
+            //í”Œë ˆì´ì–´ ë¬´ê¸° ë¦¬ìŠ¤íŠ¸ë¥¼ ë°›ì•„ì„œ í•´ë‹¹ë˜ëŠ” íƒ„ì•½ ë“œëí•˜ë„ë¡ êµ¬í˜„
+            //í”Œë ˆì´ì–´ ì—ì„œ ë¬´ê¸° ê´€ë¦¬ë¥¼ ì–´ë–»ê²Œ í• ì§€ ë°›ì€ í›„ êµ¬í˜„ 
             int rate = Random.Range(0, 100);
             if (rate <= 30) return;
 
@@ -81,7 +81,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
             Vector2 itemSpawnPos = (Vector2)transform.position + itemDropOffset;
 
             Instantiate(bulletRewards[i], itemSpawnPos, Quaternion.identity);
-            Debug.Log($"{bulletRewards[i].name} µå¶ø");
+            Debug.Log($"{bulletRewards[i].name} ë“œë");
         }
     }
     protected void GoldDrop()
@@ -90,7 +90,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         Vector2 goldSpawnPos = (Vector2)transform.position + goldDropOffset;
 
         Instantiate(goldReward, goldSpawnPos, Quaternion.identity);
-        Debug.Log($"{goldReward.name} µå¶ø");
+        Debug.Log($"{goldReward.name} ë“œë");
     }
     //private IEnumerator GetDamageDelayCo()
     //{
