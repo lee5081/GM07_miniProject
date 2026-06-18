@@ -2,7 +2,6 @@
 
 public class PlayerMovement : MonoBehaviour // 플레이어의 움직임과 애니메이션을 담당하는 MonoBehaviour 클래스
 {
-    [SerializeField] private CharacterData characterData;
     [SerializeField] private PlayerStats stats;
 
     private Animator animator;
@@ -47,7 +46,7 @@ public class PlayerMovement : MonoBehaviour // 플레이어의 움직임과 애�
         animator.SetBool("IsMoving", moveInput.magnitude > 0);   // Bool 타입의 애니메이션 상태값 IsMoving 파라미터를 설정 (백터크기가 0보다크면 true) 
         animator.SetInteger("Direction", ani_direction); // 최종 애니메이션 상태값 변경
 
-        rb.linearVelocity = characterData.moveSpeed * moveInput; // 최종 이동
+        rb.linearVelocity = stats.MoveSpeed * moveInput; // 최종 이동
     }
 
 

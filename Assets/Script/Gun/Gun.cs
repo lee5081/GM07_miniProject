@@ -16,8 +16,6 @@ public class Gun : MonoBehaviour
     protected int currentMagazineCount;
     protected bool isReloading; // 재장전 유무
 
-    public TextMeshProUGUI text;
-
 
     public SpriteRenderer GunSprite => weaponRenderer;
     public int CurrentAmmo => currentAmmo;   // 현재 탄약 외부에서 꺼내쓸수있도록 빼놈
@@ -28,7 +26,6 @@ public class Gun : MonoBehaviour
     public int MagazineCount => data.magazineCount;
     protected virtual void Awake()  // 초기화
     {
-       text = GameObject.Find("GunStatsUi").GetComponent<TextMeshProUGUI>();
         currentAmmo = data.magazineSize; // 현재 잔탄수를 GunData의 magzineSzie 만큼 설정
         currentMagazineCount = data.magazineCount;
         if (weaponRenderer != null)
@@ -41,7 +38,6 @@ public class Gun : MonoBehaviour
 
    public void ShowUi()
     {
-        text.text = $"{currentAmmo} / {data.magazineSize}   remaining magzin: {currentMagazineCount}";
     }
 
 
@@ -113,7 +109,6 @@ public class Gun : MonoBehaviour
     private IEnumerator ReloadCoroutine()
     {
         isReloading = true; // 재장전 상태 변경
-        text.text = "Reloading....";
         yield return new WaitForSeconds(data.reloadTime); // GunData의 realoadTime 만큼 대기
 
         currentAmmo = data.magazineSize;
