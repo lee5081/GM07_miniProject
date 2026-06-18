@@ -12,15 +12,9 @@ public class BasicEnemy : EnemyBase
     [Header("이동 설정")]
     [SerializeField] private float toDistance = 5;
 
-    private float moveRandom;
-    private float angle;
     private Coroutine attackRoutine;
 
     private Vector3 dir;
-    private void Awake()
-    {
-        moveRandom = Random.Range(0, 2);
-    }
     private void Update()
     {
         float dis = Vector3.Distance(Player.Instance.transform.position, transform.position);
@@ -33,32 +27,9 @@ public class BasicEnemy : EnemyBase
 
         Attack();
     }
-    protected void Move()
-    {
-        if (moveRandom == 0)
-        {
-            StraightMove();
-        }
-        else
-        {
-            CurveMove();
-        }
-    }
-    private void StraightMove()
+    private void Move()
     {
         transform.position += dir * moveSpeed * Time.deltaTime;
-    }
-    private void CurveMove()
-    {
-        angle += moveSpeed * Time.deltaTime;
-
-        Vector3 basemove = dir * moveSpeed * Time.deltaTime;
-
-        Vector3 side = new Vector3(-dir.y, dir.x, 0f);
-
-        Vector3 sideOffset = side * Mathf.Sin(angle * 3f) * 6f;
-
-        transform.position += basemove + sideOffset;
     }
     protected void Attack()
     {
