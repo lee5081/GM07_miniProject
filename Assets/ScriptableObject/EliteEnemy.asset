@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5572a910b5166e4dafeffb6088a2003, type: 3}
-  m_Name: BasicEnemy
+  m_Name: EliteEnemy
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: TEST01
-  enemyPrefab: {fileID: 5652750448426934237, guid: 8a390c423728bb5478cfb5a3e3423bc4, type: 3}
-  enemySprite: {fileID: 21300000, guid: 9ea72647c24be493ba6f15a9cd2a24ae, type: 3}
+  enemyName: Elite Enemy
+  enemyPrefab: {fileID: 159018165468022563, guid: 82195f644c1686f47bd9a4beba2be100, type: 3}
+  enemySprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   maxHp: 30
   attack: 5
   moveSpeed: 1

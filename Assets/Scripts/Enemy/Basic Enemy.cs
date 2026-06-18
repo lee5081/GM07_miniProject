@@ -28,7 +28,7 @@ public class BasicEnemy : EnemyBase
 
         if (dis > toDistance)
         {
-            MoveToPlayer();
+            Move();
         }
         else if (dis <= toDistance)
         {
@@ -39,7 +39,7 @@ public class BasicEnemy : EnemyBase
     {
         Attack();
     }
-    protected override void MoveToPlayer()
+    protected void Move()
     {
         if (moveRandom == 0)
         {
@@ -70,14 +70,14 @@ public class BasicEnemy : EnemyBase
 
         transform.position += basemove + sideOffset * Time.deltaTime;
     }
-    protected override void RoundPlayer()
+    protected void RoundPlayer()
     {
         transform.RotateAround(Player.Instance.transform.position, Vector3.forward, rotateSpeed * Time.deltaTime);
 
         Vector3 dir = (transform.position - Player.Instance.transform.position).normalized;
         transform.position = Player.Instance.transform.position + dir * radius;
     }
-    protected override void Attack()
+    protected void Attack()
     {
         if (attackRoutine == null)
         {

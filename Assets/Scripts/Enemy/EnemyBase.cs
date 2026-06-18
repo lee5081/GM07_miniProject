@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class EnemyBase : MonoBehaviour, IDamageable
+public class EnemyBase : MonoBehaviour, IDamageable
 {
     protected EnemyData enemyData;
     private Sprite enemySprite;
@@ -109,7 +109,4 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         yield return DamageDelay;
         IsDamageable = true;
     }
-    protected abstract void MoveToPlayer();
-    protected abstract void RoundPlayer();
-    protected abstract void Attack();
 }
