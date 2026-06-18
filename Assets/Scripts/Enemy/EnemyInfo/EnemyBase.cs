@@ -10,29 +10,16 @@ public class EnemyBase : MonoBehaviour, IDamageable
     protected int currentHp;
     protected int attack;
     protected float moveSpeed;
-    protected float attackDelay;
-    public WaitForSeconds AttackDelay;
     protected float damageDelay;
     public WaitForSeconds DamageDelay;
     protected ItemBase goldReward;
     protected ItemBase[] bulletRewards;
     protected float itemDropRadius;
-    public bool IsDamageable { get; private set; } = true;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("PlayerBullet"))
-        {
-            if (!IsDamageable) return;
-            PlayerBullet bullet = collision.GetComponent<PlayerBullet>();
-            if (bullet != null)
-            {
-                Debug.Log("공격 감지");
-                TakeDamage(bullet.damage);
-                Destroy(collision.gameObject);
-            }
-        }
-    }
+    //public bool IsDamageable { get; private set; } = true;
+
+    protected Sprite sprite;
+
     public void Initialize(EnemyData data)
     {
         if (data == null) return;
@@ -40,23 +27,24 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
         gameObject.name = enemyData.EnemyName;
         enemySprite = enemyData.EnemySprite;
-
         currentHp = enemyData.MaxHp;
         attack = enemyData.Attack;
         moveSpeed = enemyData.MoveSpeed;
-        attackDelay = enemyData.AttackDelay;
         damageDelay = enemyData.DamageDelay;
         goldReward = enemyData.GoldReward;
         bulletRewards = enemyData.BulletRewards;
         itemDropRadius = enemyData.ItemDropRadius;
-
-        AttackDelay = new WaitForSeconds(attackDelay);
         DamageDelay = new WaitForSeconds(damageDelay);
+    }
+    private void Awake()
+    {
+        sprite = GetComponent<Sprite>();
+        sprite = enemySprite;
     }
     public void TakeDamage(int damage)
     {
-        if (!IsDamageable) return;
-        IsDamageable = false;
+        //if (!IsDamageable) return;
+        //IsDamageable = false;
         currentHp -= damage;
         Debug.Log($"{gameObject.name} 데미지 받음 ({damage}");
         Debug.Log($"{gameObject.name} 현재 체력 : {currentHp}");
@@ -64,10 +52,10 @@ public class EnemyBase : MonoBehaviour, IDamageable
         {
             EnemyDie();
         }
-        else
-        {
-            StartCoroutine(GetDamageDelayCo());
-        }
+        //else
+        //{
+        //    StartCoroutine(GetDamageDelayCo());
+        //}
     }
     protected void EnemyDie()
     {
@@ -104,9 +92,9 @@ public class EnemyBase : MonoBehaviour, IDamageable
         Instantiate(goldReward, goldSpawnPos, Quaternion.identity);
         Debug.Log($"{goldReward.name} 드랍");
     }
-    private IEnumerator GetDamageDelayCo()
-    {
-        yield return DamageDelay;
-        IsDamageable = true;
-    }
+    //private IEnumerator GetDamageDelayCo()
+    //{
+    //    yield return DamageDelay;
+    //    IsDamageable = true;
+    //}
 }

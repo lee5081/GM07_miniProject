@@ -183,10 +183,19 @@ MonoBehaviour:
   firePoint: {fileID: 181323770550844694}
   enemyBulletPrefab: {fileID: 720359188151084633, guid: b15da03873d560a48a23351ddebd997c, type: 3}
   enemyRaserPrefab: {fileID: 4650901880643937673, guid: 060ff3d72c0e71f45b3de53051dff3de, type: 3}
-  StraightAttackDelay: 1
-  rotateSpeed: 10
-  radius: 5
   moveWaitTime: 3
+  attackDelay: 5
+  straightAttackCount: 5
+  straightAttackDelay: 0.5
+  curveAttackCount: 10
+  curveAttackDelay: 0.5
+  circleAttackCount: 30
+  circleAttackDelay: 0
+  spiralAttackCount: 50
+  spiralAttackDelay: 0.3
+  spiralAngle: 30
+  homingAttackCount: 10
+  homingAttackDelay: 0.5
 --- !u!1 &8845080907484750021
 GameObject:
   m_ObjectHideFlags: 0

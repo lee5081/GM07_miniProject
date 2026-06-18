@@ -109,7 +109,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BasicEnemy
   firePoint: {fileID: 181323770550844694}
   enemyBulletPrefab: {fileID: 720359188151084633, guid: b15da03873d560a48a23351ddebd997c, type: 3}
-  StraightAttackDelay: 1
+  toDistance: 5
+  attackDelay: 3
+  straightAttackCount: 5
+  StraightAttackDelay: 0.5
 --- !u!50 &8364381971800361981
 Rigidbody2D:
   serializedVersion: 5
