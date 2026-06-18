@@ -78,9 +78,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -44025399
-  m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 5084567071681198889, guid: 29b57e2afa081d34a9dd17fe80f06143,
     type: 3}
@@ -109,3 +109,4 @@ MonoBehaviour:
   firePoint: {fileID: 765447738141191363}
   weaponRenderer: {fileID: 1361915081903656466}
   bulletData: {fileID: 11400000, guid: 0cb2c17b36cb32b4b85e491a265d5f55, type: 2}
+  bulletPool: {fileID: 0}

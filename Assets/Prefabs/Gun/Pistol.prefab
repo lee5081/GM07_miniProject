@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1361915081903656466}
   - component: {fileID: 1576163050762186942}
   m_Layer: 20
-  m_Name: Shotgun
+  m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,15 +78,15 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -44025399
-  m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2408530018317867212, guid: edcf28742db19c441a0d57650cb22eee,
+  m_Sprite: {fileID: 4512714918657851343, guid: dd95f0bd06db0984d93bf04ddc7aae76,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 10.1, y: 7.6}
   m_AdaptiveModeThreshold: 0.5
@@ -105,7 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edaadbab832d6284d948471467e33a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gun
-  data: {fileID: 11400000, guid: 9dbe8c53392db4945a5617d64fb4968d, type: 2}
+  data: {fileID: 11400000, guid: e68fd67699c0e984fa658a2870170e14, type: 2}
   firePoint: {fileID: 765447738141191363}
   weaponRenderer: {fileID: 1361915081903656466}
-  bulletData: {fileID: 11400000, guid: 7a318f5fece0cf44a8eebdcd2bd40b8e, type: 2}
+  bulletData: {fileID: 11400000, guid: 0cb2c17b36cb32b4b85e491a265d5f55, type: 2}
+  bulletPool: {fileID: 0}
