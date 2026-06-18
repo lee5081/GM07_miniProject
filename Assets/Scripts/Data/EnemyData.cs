@@ -18,7 +18,8 @@ public class EnemyData : ScriptableObject
     [SerializeField] private float damageDelay = 0.1f;
 
     [Header("Enemy 처치 보상")]
-    [SerializeField] private ItemBase[] rewards;
+    [SerializeField] private ItemBase goldReward;
+    [SerializeField] private ItemBase[] bulletRewards;
     [SerializeField] private float itemDropRadius;
 
     public string EnemyName { get { return enemyName; } }
@@ -29,6 +30,7 @@ public class EnemyData : ScriptableObject
     public float MoveSpeed { get { return moveSpeed; } }
     public float AttackDelay { get { return attackDelay; } }
     public float DamageDelay { get { return damageDelay; } }
-    public ItemBase[] Rewards { get { return rewards; } }
+    public ItemBase GoldReward { get { return goldReward; } }
+    public ItemBase[] BulletRewards { get { return bulletRewards; } }
     public float ItemDropRadius { get { return itemDropRadius; } }
 }

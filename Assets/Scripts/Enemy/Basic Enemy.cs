@@ -1,28 +1,54 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class BasicEnemy : EnemyBase
 {
-    [SerializeField] Transform firePoint;
-    [SerializeField] EnemyBullet enemyBulletPrefab;
-    [SerializeField] float StraightAttackDelay = 1.0f;
+    [Header("공격 설정")]
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private EnemyBullet enemyBulletPrefab;
+    [SerializeField] private float StraightAttackDelay = 1.0f;
+
+    [Header("이동 설정")]
+    [SerializeField] private float toDistance = 5;
+    [SerializeField] private float radius = 5;
+    [SerializeField] private float rotateSpeed = 50;
+
+    private float moveRandom;
     private float angle;
     private Coroutine attackRoutine;
 
+    private void Awake()
+    {
+        moveRandom = Random.Range(0, 2);
+    }
     private void LateUpdate()
     {
-        Move();
+        float dis = Vector3.Distance(Player.Instance.transform.position, transform.position);
+
+        if (dis > toDistance)
+        {
+            MoveToPlayer();
+        }
+        else if (dis <= toDistance)
+        {
+            RoundPlayer();
+        }
     }
     private void Update()
     {
         Attack();
     }
-    protected override void Move()
+    protected override void MoveToPlayer()
     {
-        StraightMove();
-        CurveMove();
+        if (moveRandom == 0)
+        {
+            StraightMove();
+        }
+        else
+        {
+            CurveMove();
+        }
     }
     private void StraightMove()
     {
@@ -33,8 +59,23 @@ public class BasicEnemy : EnemyBase
     private void CurveMove()
     {
         angle += moveSpeed * Time.deltaTime;
-        Vector3 targetPos = Player.Instance.transform.position + new Vector3(Mathf.Cos(angle) * 3, Mathf.Sin(angle) * 3, 0);
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+
+        Vector3 dir = (Player.Instance.transform.position - transform.position).normalized;
+
+        Vector3 basemove = dir * moveSpeed * Time.deltaTime;
+
+        Vector3 side = new Vector3(-dir.y, dir.x, 0f);
+
+        Vector3 sideOffset = side * Mathf.Sin(angle * 3f) * 6f;
+
+        transform.position += basemove + sideOffset * Time.deltaTime;
+    }
+    protected override void RoundPlayer()
+    {
+        transform.RotateAround(Player.Instance.transform.position, Vector3.forward, rotateSpeed * Time.deltaTime);
+
+        Vector3 dir = (transform.position - Player.Instance.transform.position).normalized;
+        transform.position = Player.Instance.transform.position + dir * radius;
     }
     protected override void Attack()
     {
@@ -45,7 +86,7 @@ public class BasicEnemy : EnemyBase
     }
     private IEnumerator StraightAttackCo()
     {
-        for (int i=0; i< 3; i++)
+        for (int i = 0; i < 3; i++)
         {
             Instantiate(enemyBulletPrefab, firePoint.position, Quaternion.identity);
             yield return new WaitForSeconds(StraightAttackDelay);

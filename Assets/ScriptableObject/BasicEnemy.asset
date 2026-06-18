@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: TEST01
   enemyPrefab: {fileID: 5652750448426934237, guid: 8a390c423728bb5478cfb5a3e3423bc4, type: 3}
-  enemySprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  enemySprite: {fileID: 21300000, guid: 9ea72647c24be493ba6f15a9cd2a24ae, type: 3}
   maxHp: 30
   attack: 5
   moveSpeed: 1

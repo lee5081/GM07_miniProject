@@ -14,14 +14,11 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     public WaitForSeconds AttackDelay;
     protected float damageDelay;
     public WaitForSeconds DamageDelay;
-    protected ItemBase[] rewards;
+    protected ItemBase goldReward;
+    protected ItemBase[] bulletRewards;
     protected float itemDropRadius;
     public bool IsDamageable { get; private set; } = true;
 
-    private void Awake()
-    {
-        enemySprite = enemyData.GetComponent<Sprite>();
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerBullet"))
@@ -40,18 +37,19 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
         if (data == null) return;
         enemyData = data;
+
         gameObject.name = enemyData.EnemyName;
-        if (enemySprite != null)
-        {
-            enemySprite = enemyData.EnemySprite;
-        }
+        enemySprite = enemyData.EnemySprite;
+
         currentHp = enemyData.MaxHp;
         attack = enemyData.Attack;
         moveSpeed = enemyData.MoveSpeed;
         attackDelay = enemyData.AttackDelay;
         damageDelay = enemyData.DamageDelay;
-        rewards = enemyData.Rewards;
+        goldReward = enemyData.GoldReward;
+        bulletRewards = enemyData.BulletRewards;
         itemDropRadius = enemyData.ItemDropRadius;
+
         AttackDelay = new WaitForSeconds(attackDelay);
         DamageDelay = new WaitForSeconds(damageDelay);
     }
@@ -68,7 +66,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         }
         else
         {
-            StartCoroutine(DamageDelayCo());
+            StartCoroutine(GetDamageDelayCo());
         }
     }
     protected void EnemyDie()
@@ -79,22 +77,39 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     }
     protected void DropRewards()
     {
-        for (int i = 0; i < rewards.Length; i++)
+        BulletDrop();
+        GoldDrop();
+    }
+    protected void BulletDrop()
+    {
+        for (int i = 0; i < bulletRewards.Length; i++)
         {
+            //플레이어 무기 리스트를 받아서 해당되는 탄약 드랍하도록 구현
+            //플레이어 에서 무기 관리를 어떻게 할지 받은 후 구현 
             int rate = Random.Range(0, 100);
             if (rate <= 30) return;
+
             Vector2 itemDropOffset = Random.insideUnitCircle * itemDropRadius;
             Vector2 itemSpawnPos = (Vector2)transform.position + itemDropOffset;
 
-            Instantiate(rewards[i], itemSpawnPos, Quaternion.identity);
-            Debug.Log($"{rewards[i].name} 드랍");
+            Instantiate(bulletRewards[i], itemSpawnPos, Quaternion.identity);
+            Debug.Log($"{bulletRewards[i].name} 드랍");
         }
     }
-    private IEnumerator DamageDelayCo()
+    protected void GoldDrop()
+    {
+        Vector2 goldDropOffset = Random.insideUnitCircle * itemDropRadius;
+        Vector2 goldSpawnPos = (Vector2)transform.position + goldDropOffset;
+
+        Instantiate(goldReward, goldSpawnPos, Quaternion.identity);
+        Debug.Log($"{goldReward.name} 드랍");
+    }
+    private IEnumerator GetDamageDelayCo()
     {
         yield return DamageDelay;
         IsDamageable = true;
     }
-    protected abstract void Move();
+    protected abstract void MoveToPlayer();
+    protected abstract void RoundPlayer();
     protected abstract void Attack();
 }

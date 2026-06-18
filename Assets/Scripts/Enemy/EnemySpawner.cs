@@ -4,6 +4,8 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private EnemyData enemyData;
 
+    [SerializeField] private float spawnRadius = 5;
+
     private bool isSpawnable = true;
 
     private void Start()
@@ -17,7 +19,9 @@ public class EnemySpawner : MonoBehaviour
         if (enemyData == null) return;
         if (enemyData.EnemyPrefab == null) return;
 
-        EnemyBase enemy = Instantiate(enemyData.EnemyPrefab, transform.position, Quaternion.identity);
+        Vector2 spawnPos = Random.insideUnitCircle * spawnRadius;
+
+        EnemyBase enemy = Instantiate(enemyData.EnemyPrefab, spawnPos, Quaternion.identity);
 
         enemy.Initialize(enemyData);
         isSpawnable = false;
