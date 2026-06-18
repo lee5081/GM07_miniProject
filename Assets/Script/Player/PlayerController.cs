@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour  // 플레이어의 인풋 ( 마�
     }
 
 
+    
+
     private void ChangeGun()
     {
         for(int i = 0; i < PlayerInventory.Instance.QuickSlotLength; i++)
@@ -52,6 +54,10 @@ public class PlayerController : MonoBehaviour  // 플레이어의 인풋 ( 마�
         Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized; // 상하좌우 입력값 vector2 로 저장한 후 대각이동빠름 방지하기위해 normalized
         movement.SetMoveInput(moveInput); // PlayerMovement 에서 움직임 처리
 
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            movement.TryDodge();
+        }
     }
 
 

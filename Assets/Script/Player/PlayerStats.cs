@@ -10,9 +10,14 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public float MaxHealth { get; private set; } // 최대체력
     public float CurrentHealth { get; private set; } // 현재 체력
 
+    public float DodgeSpeed { get; private set; } // 구르기 , 회피 속도
+
+    public float DodgeCooltime { get; private set; }
+
+    public float DodgeDuration { get; private set; }
     public bool IsDodge { get; set; }
     public int Gold { get; private set; }
-    
+
 
     private void Awake()
     {
@@ -34,6 +39,9 @@ public class PlayerStats : MonoBehaviour, IDamageable
         MoveSpeed = data.moveSpeed;
         MaxHealth = data.maxHealth;
         CurrentHealth = MaxHealth;
+        DodgeSpeed = data.dodgeSpeed;
+        DodgeCooltime = data.dodgeCooltime;
+        DodgeDuration = data.dodgeDuration;
     }
 
     public void TakeDamage(float damage) // IDamageable 
@@ -46,7 +54,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         }
     }
 
-    public void Heal(float amount) 
+    public void Heal(float amount)
     {
         CurrentHealth = Mathf.Min(CurrentHealth + amount, MaxHealth); // 최대체력은 넘지않게 
     }
