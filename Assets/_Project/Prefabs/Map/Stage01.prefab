@@ -25496,7 +25496,7 @@ MonoBehaviour:
   spawnPoints: []
   spawnArea: {fileID: 4198833651625754515}
   enemyCount: 5
-  enemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 7017249005054604414, guid: 070e2c5ff938d084480dd9fff80fe406, type: 3}
 --- !u!1 &2104489422570582729
 GameObject:
   m_ObjectHideFlags: 0
