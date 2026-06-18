@@ -1,17 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class BasicEnemy : EnemyBase
 {
-    [Header("°ø°Ý ±âº» ¼³Á¤")]
+    [Header("ê³µê²© ê¸°ë³¸ ì„¤ì •")]
     [SerializeField] private Transform firePoint;
     [SerializeField] private EnemyBullet enemyBulletPrefab;
 
-    [Header("ÀÌµ¿ ¼³Á¤")]
+    [Header("ì´ë™ ì„¤ì •")]
     [SerializeField] private float toDistance = 5;
 
-    [Header("°ø°Ý ¼³Á¤")]
+    [Header("ê³µê²© ì„¤ì •")]
     [SerializeField] private float attackDelay = 3.0f;
     private WaitForSeconds AttackWait;
     [SerializeField] private float straightAttackCount;
@@ -29,9 +29,9 @@ public class BasicEnemy : EnemyBase
     }
     private void Update()
     {
-        dis = Vector3.Distance(Player.Instance.transform.position, transform.position);
+        dis = Vector3.Distance(PlayerStats.Instacne.transform.position, transform.position);
 
-        dir = (Player.Instance.transform.position - transform.position).normalized;
+        dir = (PlayerStats.Instacne.transform.position - transform.position).normalized;
         if (dis > toDistance)
         {
             Move();

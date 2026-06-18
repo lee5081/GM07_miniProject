@@ -1,4 +1,4 @@
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -76,7 +76,7 @@ public class EnemyBullet : MonoBehaviour
     }
     private void HomingMove()
     {
-        dir = (Player.Instance.transform.position - transform.position).normalized;
+        dir = (PlayerStats.Instacne.transform.position - transform.position).normalized;
         transform.position += dir * speed * Time.deltaTime;
     }
 }

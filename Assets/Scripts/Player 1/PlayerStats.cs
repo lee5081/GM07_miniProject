@@ -14,6 +14,8 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public float DodgeCooltime { get; private set; }
 
+    public Transform Transform { get; private set; }
+
     public float DodgeDuration { get; private set; }
     public bool IsDodge { get; set; }
     public int Gold { get; private set; }
@@ -42,6 +44,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         DodgeSpeed = data.dodgeSpeed;
         DodgeCooltime = data.dodgeCooltime;
         DodgeDuration = data.dodgeDuration;
+        Transform = transform;
     }
 
     public void TakeDamage(float damage) // IDamageable 

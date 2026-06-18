@@ -1,48 +1,48 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class EliteEnemy : EnemyBase
 {
-    [Header("°ø°İ ±âº» ¼³Á¤")]
+    [Header("ê³µê²© ê¸°ë³¸ ì„¤ì •")]
     [SerializeField] private Transform firePoint;
     [SerializeField] private EnemyBullet enemyBulletPrefab;
     [SerializeField] private EnemyRaser enemyRaserPrefab;
 
-    [Header("´ÙÀ½ ÀÌµ¿¸Ş¼­µå±îÁöÀÇ ÄğÅ¸ÀÓ")]
+    [Header("ë‹¤ìŒ ì´ë™ë©”ì„œë“œê¹Œì§€ì˜ ì¿¨íƒ€ì„")]
     [SerializeField] private float moveWaitTime = 5.0f;
 
-    //ÀÌµ¿°ü·Ã
+    //ì´ë™ê´€ë ¨
     private Vector3 dir;
     private float dis;
     private Vector3 returnPos;
     private float angle;
 
-    [Header("°ø°İ ¼³Á¤")]
+    [Header("ê³µê²© ì„¤ì •")]
     [SerializeField] private float attackDelay;
     private WaitForSeconds AttackWait;
-    [Header("Á÷¼±°ø°İ ¼³Á¤")]
+    [Header("ì§ì„ ê³µê²© ì„¤ì •")]
     [SerializeField] private float straightAttackCount;
     [SerializeField] private float straightAttackDelay;
     private WaitForSeconds StraightAttackWait;
-    [Header("°î¼±°ø°İ ¼³Á¤")]
+    [Header("ê³¡ì„ ê³µê²© ì„¤ì •")]
     [SerializeField] private float curveAttackCount;
     [SerializeField] private float curveAttackDelay;
     private WaitForSeconds CurveAttackWait;
-    [Header("¿øÇü°ø°İ ¼³Á¤")]
+    [Header("ì›í˜•ê³µê²© ì„¤ì •")]
     [SerializeField] private float circleAttackCount;
     [SerializeField] private float circleAttackDelay;
     private WaitForSeconds CircleAttackWait;
-    [Header("³ª¼±°ø°İ ¼³Á¤")]
+    [Header("ë‚˜ì„ ê³µê²© ì„¤ì •")]
     [SerializeField] private float spiralAttackCount;
     [SerializeField] private float spiralAttackDelay;
     private WaitForSeconds SpiralAttackWait;
     [SerializeField] private float spiralAngle;
-    [Header("À¯µµ°ø°İ ¼³Á¤")]
+    [Header("ìœ ë„ê³µê²© ì„¤ì •")]
     [SerializeField] private float homingAttackCount;
     [SerializeField] private float homingAttackDelay;
     private WaitForSeconds HomingAttackWait;
 
-    //ÆĞÅÏ °ü·Ã
+    //íŒ¨í„´ ê´€ë ¨
     private EnemyBulletManager bulletManager;
     private void Awake()
     {
@@ -62,9 +62,9 @@ public class EliteEnemy : EnemyBase
 
     private void Update()
     {
-        dir = (Player.Instance.transform.position - transform.position).normalized;
-        dis = Vector3.Distance(Player.Instance.transform.position, transform.position);
-        returnPos = Player.Instance.transform.position - (10 * dir);
+        dir = (PlayerStats.Instacne.transform.position - transform.position).normalized;
+        dis = Vector3.Distance(PlayerStats.Instacne.transform.position, transform.position);
+        returnPos = PlayerStats.Instacne.transform.position - (10 * dir);
     }
     private IEnumerator MoveCo()
     {
